@@ -50,6 +50,7 @@ insert_feature_statement = """
 
 trackRecords = []
 featureRecords = []
+playlist_id=[]
 
 
 for i in data["tracks"]["items"]:
@@ -58,6 +59,15 @@ for i in data["tracks"]["items"]:
 for i in range(0, len(tracks)):
     track.append(client.get_track(tracks[i]))
     audio_feat.append(client.get_audio_features(tracks[i]))
+for i in x["items"]:
+    playlist_id.append(i["id"])
+
+for i in range(0, len(playlist_id)):
+    playlist_id.append(client.get_playlist(playlist_id[i]))
+
+for j in range(0, len(playlist_id)):
+    for i in a[j]["tracks"]["items"]:
+        tracks.append(i["track"]["id"])
 
 for i in range(0, len(audio_feat)):
     featureRecords.append([audio_feat[i].get("id"), audio_feat[i].get("danceability"), audio_feat[i].get("energy"),
